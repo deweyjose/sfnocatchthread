@@ -1,5 +1,3 @@
-package com.teikametrics.ingestion;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,19 +40,17 @@ public class Main {
                     {
                         try
                         {
-                            Thread.sleep(300);
+                            Thread.sleep(1_000);
                             LOGGER.info("iteration {}", this.interations++);
 
                             if (doThrow) {
-                                LOGGER.error("will throw, make sure you uncomment the catch(Throwable) or the thread will die");
+                                LOGGER.error("will throw");
                                 throw new RuntimeException("oops, make sure you uncomment the catch(Throwable)");
                             }
                         } catch (InterruptedException e) {
                             LOGGER.warn("interrupted, time to exit;");
                             break;
-                        }/*
-                        uncomment me and the thread will continue processing
-                         catch (Throwable t) {
+                        } /*catch (Throwable t) {
                             LOGGER.error("catch throwable, reset do throw");
                             doThrow = false;
                         }*/
@@ -76,6 +72,8 @@ public class Main {
         for (int i = 0; i < 5; i++) {
             Thread.sleep(1_000);
         }
+
+        LOGGER.info("should have seen \"iteration N\" messages after \"will throw\". If not, uncomment the catch(Throwable)");
 
         m.stop();
     }
